@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="211.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driverstest.BgColourSelectController">
+   <children>
+      <Slider fx:id="rSlide" layoutX="14.0" layoutY="35.0" max="255.0" value="255.0" />
+      <Slider fx:id="gSlide" layoutX="14.0" layoutY="58.0" max="255.0" value="255.0" />
+      <Slider fx:id="bSlide" layoutX="14.0" layoutY="83.0" max="255.0" value="255.0" />
+      <Slider fx:id="aSlide" layoutX="14.0" layoutY="107.0" max="1.0" value="255.0" />
+      <Rectangle fx:id="colorPreview" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="285.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Text layoutX="154.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Red" />
+      <Text layoutX="154.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green" />
+      <Text layoutX="154.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blue" />
+      <Text layoutX="154.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alpha" />
+      <TextField fx:id="rText" editable="false" layoutX="193.0" layoutY="30.0" prefHeight="25.0" prefWidth="32.0" />
+      <TextField fx:id="gText" editable="false" layoutX="193.0" layoutY="53.0" prefHeight="25.0" prefWidth="32.0" />
+      <TextField fx:id="bText" editable="false" layoutX="193.0" layoutY="78.0" prefHeight="25.0" prefWidth="32.0" />
+      <TextField fx:id="aText" editable="false" layoutX="193.0" layoutY="102.0" prefHeight="25.0" prefWidth="32.0" />
+      <Text layoutX="14.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Background Colour" />
+      <Button fx:id="doneButton" layoutX="14.0" layoutY="172.0" mnemonicParsing="false" onAction="#doneButtonPressed" text="Done" />
+   </children>
+</AnchorPane>
