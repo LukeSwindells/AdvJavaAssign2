@@ -6,8 +6,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driverstest.TermsConditionsController">
    <children>
-      <Button fx:id="startButton" layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#startButtonPressed" prefHeight="25.0" prefWidth="573.0" text="Start" />
+      <Button fx:id="startButton" layoutX="456.0" layoutY="244.0" mnemonicParsing="false" onAction="#startButtonPressed" prefHeight="53.0" prefWidth="138.0" style="-fx-background-color: green;" text="Start" />
       <Button fx:id="bgButton" layoutX="15.0" layoutY="330.0" mnemonicParsing="false" onAction="#bgButtonPressed" prefHeight="25.0" prefWidth="573.0" text="Change Background Colour" />
-      <Text layoutX="91.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When the test starts you have 300 seconds. There are three cars, when a hazard appears click the car that needs to stop in 3 seconds. After the test you will get your results. Click Select Background Colour to change background colour. Click Start to Start the Test." textAlignment="CENTER" wrappingWidth="421.13671875" />
+      <Text layoutX="22.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When the test starts you have 300 seconds. There are three cars, when a hazard appears click the car that needs to stop in 3 seconds. After the test you will get your results. Click Select Background Colour to change background colour. Click Start to Start the Test." textAlignment="JUSTIFY" wrappingWidth="421.13671875" />
+      <Button layoutX="85.0" layoutY="188.0" mnemonicParsing="false" text="Demo" />
    </children>
 </AnchorPane>
