@@ -18,6 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.image.Image;
 
 /**
  * FXML Controller class for the Test Screen
@@ -38,6 +41,7 @@ public class TestScreenController implements Initializable {
     private Boolean car2Move = true;
     private Boolean car3Move = true;
     private int resultID = 0;
+    private List<ImageView> cars = new ArrayList<ImageView>();
     
     
     /**
@@ -87,29 +91,19 @@ public class TestScreenController implements Initializable {
     /**
      * Checks if car number i can move and if so moves it.
      */
-    private void moveCar(int i)
+    private void moveCars()
     {
         ImageView toMove;
-        switch(i){
-            case 1:toMove = car1;
-                   break;
-            case 2:toMove = car2;
-                   break;
-            case 3:toMove = car3;
-                   break;
-            default:toMove = car1;
+        for(int i=0; i < cars.size(); i++ )
+        {
+            toMove = cars.get(i);
         }
+        toMove = car1;
+        
         if(!(car1.getLayoutX()- toMove.getLayoutX() < 75 && car1.getLayoutX() - toMove.getLayoutX() > 0)){
                 if(!(car2.getLayoutX() - toMove.getLayoutX() < 75 && car2.getLayoutX() - toMove.getLayoutX() > 0)){
                     if(!(car3.getLayoutX() - toMove.getLayoutX() < 75 && car3.getLayoutX() - toMove.getLayoutX() > 0)){
-                        switch(i){
-                            case 1:if(car1Move){toMove.setLayoutX(toMove.getLayoutX()+1);}
-                                   break;
-                            case 2:if(car2Move){toMove.setLayoutX(toMove.getLayoutX()+1);}
-                                   break;
-                            case 3:if(car3Move){toMove.setLayoutX(toMove.getLayoutX()+1);}
-                                   break;
-                        }
+                        if(car1Move){toMove.setLayoutX(toMove.getLayoutX()+1);}
                     }
                 }
             }  
@@ -171,9 +165,7 @@ public class TestScreenController implements Initializable {
     public void runTest()throws Exception{
         Long end = System.currentTimeMillis() + 300000;
         AnimationTimer a = new AnimationTimer(){@Override public void handle(long now){
-            moveCar(1);
-            moveCar(2);
-            moveCar(3);
+            moveCars();
             createHazard();
             if(System.currentTimeMillis() > end){
                 try {
@@ -191,6 +183,21 @@ public class TestScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Image image = new Image("../Car1.png");
+        for(int i = 0; i < DriversTestModel.getCarNo(); i++)
+        {
+            switch(DriversTestModel.getCarColor()){
+                case "Red": image = new Image("../Car2.png");
+                    break;
+                case "Green": image = new Image("../Car1.png");
+                    break;
+                case "Blue": image = new Image("../Car3.png");
+                    break;
+                default: image = new Image("../Car2.png");       
+            }  
+            ImageView car = new ImageView(); 
+            cars.add(car);
+        }
         int r = DriversTestModel.getRed();
         int g = DriversTestModel.getGreen();
         int b = DriversTestModel.getBlue();
