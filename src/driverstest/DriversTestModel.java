@@ -66,6 +66,26 @@ public class DriversTestModel {
         testData.add(t);
     }
     
+    public static int getCarNo()
+    {
+        return carNo;
+    }
+    
+    public static void setCarNo(int i)
+    {
+        carNo = i;
+    }
+    
+    public static String getCarColor()
+    {
+        return carColor;
+    }
+    
+    public static void setCarColor(String s)
+    {
+        carColor = s;
+    }
+    
     /**
      * Get all data from table. 
      */
