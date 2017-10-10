@@ -27,6 +27,7 @@ public class TermsConditionsController implements Initializable {
     /**
      * When Start button is pressed start test. 
      */
+    @FXML
     public void startButtonPressed(ActionEvent event)throws Exception {
         Node source = (Node) event.getSource();
         Stage aStage = (Stage)source.getScene().getWindow();
@@ -39,6 +40,7 @@ public class TermsConditionsController implements Initializable {
     /**
      * When Background button is pressed open colour selector. 
      */
+    @FXML
     public void bgButtonPressed(ActionEvent event)throws Exception {
         Node source = (Node) event.getSource();
         Stage aStage = (Stage)source.getScene().getWindow();
