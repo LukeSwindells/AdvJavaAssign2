@@ -53,7 +53,7 @@ public class TermsConditionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        startButton.setVisible(false);
     }    
     
 }

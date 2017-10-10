@@ -16,7 +16,10 @@ public class DriversTestModel {
     static double bgA = 1.0;
     private static List<TestResult> testData = new ArrayList<TestResult>();
     TestResult t = new TestResult(0, 0, "Start", ZonedDateTime.now());
-
+    static int carNo = 0;
+    static String carColor = new String();
+    private static List<UserData> users = new ArrayList<UserData>();
+    
     /**
      * Sets background colour. 
      */
@@ -68,5 +71,9 @@ public class DriversTestModel {
      */
     public static List<TestResult> getTableData(){
         return testData;
+    }
+    
+    public static List<UserData> getUserData(){
+        return users;
     }
 }
