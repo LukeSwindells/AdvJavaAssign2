@@ -17,7 +17,7 @@ public class DriversTestModel {
     private static List<TestResult> testData = new ArrayList<TestResult>();
     TestResult t = new TestResult(0, 0, "Start", ZonedDateTime.now());
     static int carNo = 3;
-    static String carColor = new String();
+    static String carColor = "Red";
     private static List<UserData> users = new ArrayList<UserData>();
     
     /**

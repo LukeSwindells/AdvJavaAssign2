@@ -1,5 +1,6 @@
     package driverstest;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -157,32 +158,39 @@ public class TestScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Image image;
-        //String s;
-        //s = getClass().getResource("img/Car2.png").toString();
         for(int i = 0; i < DriversTestModel.getCarNo(); i++)
         {
             switch(DriversTestModel.getCarColor()){
-                case "Red": image = new Image("file:Car2.png");
+                case "Red": image = new Image("/Car2.png");
+                System.out.println("Is loaded: " + image.isError());
                     break;
-                case "Green": image = new Image("file:Car1.png");
+                case "Green": image = new Image(getClass().getResourceAsStream("/Car1.png"));
+                System.out.println("Is loaded: " + image.isError());
                     break;
-                case "Blue": image = new Image("file:Car3.png");
+                case "Blue": image = new Image(getClass().getResourceAsStream("/Car3.png"));
+                System.out.println("Is loaded: " + image.isError());
                     break;
-                default: image = new Image("file:Car3.png");       
+                default: image = new Image(getClass().getResourceAsStream("/Car2.png"));
+                System.out.println("Is loaded: " + image.isError());
             }  
-            ImageView car = new ImageView();
+            ImageView car = new ImageView(image);
             final int finali = i;
             car.setOnMouseClicked(e -> { 
                carClicked(finali); 
             });
-            car.setImage(image);
             car.setX(i * 100);
-            car.setY(50);
+            car.setLayoutX(i * 100);
+            car.setY(100);
+            car.setLayoutY(100);
             car.setVisible(true);
             car.toFront();
+            car.setFitWidth(100);
+            car.setFitHeight(100);
+            car.setPreserveRatio(true);
             cars.add(i, car);
             carsMove.add(true);
         }
+        background.setVisible(false);
         int r = DriversTestModel.getRed();
         int g = DriversTestModel.getGreen();
         int b = DriversTestModel.getBlue();
