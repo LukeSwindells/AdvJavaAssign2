@@ -1,4 +1,4 @@
-package driverstest;
+    package driverstest;
 
 import java.net.URL;
 import java.time.ZonedDateTime;
@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
+import java.util.Random;
 
 /**
  * FXML Controller class for the Test Screen
@@ -37,11 +38,10 @@ public class TestScreenController implements Initializable {
     @FXML private Button startButton;
     private int activeCar = 0;
     private long hazardStartTime;
-    private Boolean car1Move = true;
-    private Boolean car2Move = true;
-    private Boolean car3Move = true;
+    private Boolean clickCorrect = false;
     private int resultID = 0;
     private List<ImageView> cars = new ArrayList<ImageView>();
+    private List<Boolean> carsMove = new ArrayList<Boolean>();
     
     
     /**
@@ -55,96 +55,72 @@ public class TestScreenController implements Initializable {
     /**
      * When car 1 is click check if car is active and adds result to model based on result
      */
-    public void car1Clicked(){
-        if(activeCar == 1){
-            car1Move = false;
-            DriversTestModel.addResult(resultID++, 1, "Success", ZonedDateTime.now());
+    public void carClicked(int i){
+        if(activeCar == i + 1){
+            carsMove.set(i, false);
+            DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
+            clickCorrect = true;
         }
         else{
-            DriversTestModel.addResult(resultID++ , 1, "Misclick", ZonedDateTime.now());
+            DriversTestModel.addResult(resultID++ , i+1, "Misclick", ZonedDateTime.now());
         }
     }
-    /**
-     * When car 2 is click check if car is active and adds result to model based on result
-     */
-    public void car2Clicked(){
-        if(activeCar == 2){
-            car2Move = false;
-            DriversTestModel.addResult(resultID++, 2, "Success", ZonedDateTime.now());
-        }
-        else{
-            DriversTestModel.addResult(resultID++, 2, "Misclick", ZonedDateTime.now());
-        }
-    }
-    /**
-     * When car 3 is click check if car is active and adds result to model based on result
-     */
-    public void car3Clicked(){
-        if(activeCar == 3){
-            car3Move = false;
-            DriversTestModel.addResult(resultID++, 3, "Success", ZonedDateTime.now());
-        }
-        else{
-            DriversTestModel.addResult(resultID++, 3, "Misclick", ZonedDateTime.now());
-        }
-    }
+
     /**
      * Checks if car number i can move and if so moves it.
      */
     private void moveCars()
     {
         ImageView toMove;
+        Boolean canMove = true; 
         for(int i=0; i < cars.size(); i++ )
         {
             toMove = cars.get(i);
-        }
-        toMove = car1;
-        
-        if(!(car1.getLayoutX()- toMove.getLayoutX() < 75 && car1.getLayoutX() - toMove.getLayoutX() > 0)){
-                if(!(car2.getLayoutX() - toMove.getLayoutX() < 75 && car2.getLayoutX() - toMove.getLayoutX() > 0)){
-                    if(!(car3.getLayoutX() - toMove.getLayoutX() < 75 && car3.getLayoutX() - toMove.getLayoutX() > 0)){
-                        if(car1Move){toMove.setLayoutX(toMove.getLayoutX()+1);}
+            for(int j=0; j < cars.size(); j++){
+                if(i != j){    
+                    if(cars.get(j).getLayoutX()- toMove.getLayoutX() < 75 && cars.get(j).getLayoutX() - toMove.getLayoutX() > 0){
+                        canMove = false;
                     }
                 }
-            }  
-        if(toMove.getLayoutX() >= 935){
-            toMove.setLayoutX(0);
-        }
-    };
+            }
+            if(canMove && carsMove.get(i)){toMove.setLayoutX(toMove.getLayoutX()+1);}
+            if(toMove.getLayoutX() >= 935){
+            toMove.setLayoutX(0);    
+            }
+        }    
+    }
     /**
      * Generates hazard in front of car if able.
      */
     public void createHazard(){
+        Boolean hazardCheck = true;
         if(activeCar == 0){
-            if(car1.getLayoutX()< 920 && (car2.getLayoutX() - car1.getLayoutX() > 180 || car2.getLayoutX() - car1.getLayoutX() < 0) && (car3.getLayoutX() - car1.getLayoutX() > 180 || car3.getLayoutX() - car1.getLayoutX() < 0)){
-                activeCar = 1;
+            Random r = new Random();
+            int i = r.nextInt(DriversTestModel.getCarNo());
+            for(int j=0; j < cars.size(); j++){
+                if(i != j){
+                    if(!(cars.get(i).getLayoutX()< 920 && (cars.get(j).getLayoutX() - cars.get(i).getLayoutX() > 180 || cars.get(j).getLayoutX() - cars.get(i).getLayoutX() < 0))){
+                        hazardCheck = false;
+                    }
+                }
+            }
+            if(hazardCheck){
+                activeCar = i+1;
                 hazard.setLayoutX(car1.getLayoutX()+180);
-                hazardStartTime = System.currentTimeMillis();
-                hazard.setVisible(true);
-            }
-            else if(car1.getLayoutX()< 920 && (car1.getLayoutX() - car2.getLayoutX() > 180 || car1.getLayoutX() - car2.getLayoutX() < 0) && (car3.getLayoutX() - car2.getLayoutX() > 180 || car3.getLayoutX() - car2.getLayoutX() < 0)){
-                activeCar = 2;
-                hazard.setLayoutX(car2.getLayoutX()+180);
-                hazardStartTime = System.currentTimeMillis();
-                hazard.setVisible(true);
-            }
-            else if(car1.getLayoutX()< 920 && (car1.getLayoutX() - car3.getLayoutX() > 180 || car1.getLayoutX() - car3.getLayoutX() < 0) && (car2.getLayoutX() - car3.getLayoutX() > 180 || car2.getLayoutX() - car3.getLayoutX() < 0)){
-                activeCar = 3;
-                hazard.setLayoutX(car3.getLayoutX()+180);
                 hazardStartTime = System.currentTimeMillis();
                 hazard.setVisible(true);
             }
         }
         else {
             if(hazardStartTime + 3000 < System.currentTimeMillis()){
-                if(car1Move & car2Move & car3Move){
+                if(!clickCorrect){
                     DriversTestModel.addResult(resultID++, activeCar, "Miss", ZonedDateTime.now());
+                }
+                else{
+                    clickCorrect = false;
                 }
                 activeCar = 0;
                 hazard.setVisible(false);
-                car1Move = true;
-                car2Move = true;
-                car3Move = true;
             }
         }
     }
@@ -195,8 +171,15 @@ public class TestScreenController implements Initializable {
                     break;
                 default: image = new Image("../Car2.png");       
             }  
-            ImageView car = new ImageView(); 
+            ImageView car = new ImageView();
+            final int finali = i;
+            car.setOnMouseClicked(e -> { 
+               carClicked(finali); 
+            });
+            car.setImage(image);
+            car.setLayoutX(i * 100);
             cars.add(car);
+            carsMove.add(true);
         }
         int r = DriversTestModel.getRed();
         int g = DriversTestModel.getGreen();
