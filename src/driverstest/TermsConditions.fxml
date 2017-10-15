@@ -16,14 +16,14 @@
       <Button fx:id="startButton" layoutX="456.0" layoutY="244.0" mnemonicParsing="false" onAction="#startButtonPressed" prefHeight="53.0" prefWidth="138.0" style="-fx-background-color: green;" text="Start" />
       <Button fx:id="bgButton" layoutX="15.0" layoutY="330.0" mnemonicParsing="false" onAction="#bgButtonPressed" prefHeight="25.0" prefWidth="573.0" text="Change Background Colour" />
       <Text layoutX="22.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When the test starts you have 300 seconds. There are three cars, when a hazard appears click the car that needs to stop in 3 seconds. After the test you will get your results. Click Select Background Colour to change background colour. Click Start to Start the Test." textAlignment="JUSTIFY" wrappingWidth="421.13671875" />
-      <Button defaultButton="true" layoutX="59.0" layoutY="169.0" mnemonicParsing="false" text="StartDemo" />
+      <Button fx:id="startDemoButton" defaultButton="true" layoutX="59.0" layoutY="169.0" mnemonicParsing="false" text="StartDemo" />
       <Label layoutX="57.0" layoutY="86.0" text="UserName: " />
       <Label layoutX="59.0" layoutY="122.0" text="Password:" />
-      <TextField layoutX="122.0" layoutY="82.0" promptText="Admin" text="Admin" />
-      <PasswordField layoutX="122.0" layoutY="118.0" promptText="Enter the Password" />
-      <ComboBox layoutX="349.0" layoutY="82.0" prefWidth="150.0" promptText="Please select the number of cars" />
-      <ComboBox layoutX="349.0" layoutY="118.0" prefWidth="150.0" promptText="Select the Colour of the car" />
-      <Label layoutX="59.0" layoutY="214.0" text="Number of Demos Left: " />
+      <TextField fx:id="userNameField" layoutX="122.0" layoutY="82.0" onAction="#checkLogin" promptText="Admin" text="Admin" />
+      <PasswordField fx:id="passwordField" layoutX="122.0" layoutY="118.0" onAction="#checkLogin" promptText="Enter the Password" />
+      <ComboBox fx:id="carNumBox" layoutX="349.0" layoutY="82.0" prefWidth="150.0" promptText="Please select the number of cars" />
+      <ComboBox fx:id="carColBox" layoutX="349.0" layoutY="118.0" prefWidth="150.0" promptText="Select the Colour of the car" />
+      <Label fx:id="demoLeftField" layoutX="59.0" layoutY="214.0" text="Number of Demos Left: " />
       <Label layoutX="265.0" layoutY="6.0" text="Traffic Simulator V2.0" />
       <MenuBar layoutY="2.0">
         <menus>

@@ -31,9 +31,6 @@ import java.util.Random;
 public class TestScreenController implements Initializable {
     
     @FXML private Rectangle background;
-    @FXML private ImageView car1;
-    @FXML private ImageView car2;
-    @FXML private ImageView car3;
     @FXML private ImageView hazard;
     @FXML private Button startButton;
     private int activeCar = 0;
@@ -106,7 +103,7 @@ public class TestScreenController implements Initializable {
             }
             if(hazardCheck){
                 activeCar = i+1;
-                hazard.setLayoutX(car1.getLayoutX()+180);
+                hazard.setLayoutX(cars.get(i).getLayoutX()+180);
                 hazardStartTime = System.currentTimeMillis();
                 hazard.setVisible(true);
             }
@@ -159,17 +156,19 @@ public class TestScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image("../Car1.png");
+        Image image;
+        //String s;
+        //s = getClass().getResource("img/Car2.png").toString();
         for(int i = 0; i < DriversTestModel.getCarNo(); i++)
         {
             switch(DriversTestModel.getCarColor()){
-                case "Red": image = new Image("../Car2.png");
+                case "Red": image = new Image("file:Car2.png");
                     break;
-                case "Green": image = new Image("../Car1.png");
+                case "Green": image = new Image("file:Car1.png");
                     break;
-                case "Blue": image = new Image("../Car3.png");
+                case "Blue": image = new Image("file:Car3.png");
                     break;
-                default: image = new Image("../Car2.png");       
+                default: image = new Image("file:Car3.png");       
             }  
             ImageView car = new ImageView();
             final int finali = i;
@@ -177,8 +176,11 @@ public class TestScreenController implements Initializable {
                carClicked(finali); 
             });
             car.setImage(image);
-            car.setLayoutX(i * 100);
-            cars.add(car);
+            car.setX(i * 100);
+            car.setY(50);
+            car.setVisible(true);
+            car.toFront();
+            cars.add(i, car);
             carsMove.add(true);
         }
         int r = DriversTestModel.getRed();

@@ -14,6 +14,11 @@ public class UserData {
     String password = new String();
     int demoLeft = 3;
     
+    public UserData (String u, String p){
+        username = u;
+        password = p;
+    }
+    
     public String getUsername()
     {
         return username;
