@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
 import java.util.Random;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class for the Test Screen
@@ -40,11 +41,14 @@ public class TestScreenController implements Initializable {
     private int resultID = 0;
     private List<ImageView> cars = new ArrayList<ImageView>();
     private List<Boolean> carsMove = new ArrayList<Boolean>();
+    @FXML
+    private AnchorPane pane;
     
     
     /**
      * Runs test when start button is pressed.
      */
+    @FXML
     public void startButtonPressed(ActionEvent event)throws Exception {
         startButton.setVisible(false);
         runTest();
@@ -184,9 +188,7 @@ public class TestScreenController implements Initializable {
             car.setLayoutY(100);
             car.setVisible(true);
             car.toFront();
-            car.setFitWidth(100);
-            car.setFitHeight(100);
-            car.setPreserveRatio(true);
+            pane.getChildren().add(car);
             cars.add(i, car);
             carsMove.add(true);
         }
