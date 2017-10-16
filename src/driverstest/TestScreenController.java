@@ -35,14 +35,16 @@ public class TestScreenController implements Initializable {
     @FXML private Rectangle background;
     @FXML private ImageView hazard;
     @FXML private Button startButton;
+    @FXML private AnchorPane pane;
     private int activeCar = 0;
     private long hazardStartTime;
     private Boolean clickCorrect = false;
+    private Boolean hazardActive = false;
+    private Boolean speedingActive = false;
     private int resultID = 0;
     private List<ImageView> cars = new ArrayList<ImageView>();
     private List<Boolean> carsMove = new ArrayList<Boolean>();
-    @FXML
-    private AnchorPane pane;
+    
     
     
     /**
@@ -77,6 +79,7 @@ public class TestScreenController implements Initializable {
         Boolean canMove = true; 
         for(int i=0; i < cars.size(); i++ )
         {
+            canMove = true;
             toMove = cars.get(i);
             for(int j=0; j < cars.size(); j++){
                 if(i != j){    
@@ -87,7 +90,7 @@ public class TestScreenController implements Initializable {
             }
             if(canMove && carsMove.get(i)){toMove.setLayoutX(toMove.getLayoutX()+1);}
             if(toMove.getLayoutX() >= 935){
-            toMove.setLayoutX(0);    
+            toMove.setLayoutX(0);
             }
         }    
     }
@@ -101,16 +104,20 @@ public class TestScreenController implements Initializable {
             int i = r.nextInt(DriversTestModel.getCarNo());
             for(int j=0; j < cars.size(); j++){
                 if(i != j){
-                    if(!(cars.get(i).getLayoutX()< 920 && (cars.get(j).getLayoutX() - cars.get(i).getLayoutX() > 180 || cars.get(j).getLayoutX() - cars.get(i).getLayoutX() < 0))){
-                        hazardCheck = false;
+                    if(!(cars.get(i).getLayoutX()< 920)){
+                        if(!carsMove.get(i)){
+                            hazardCheck = false;
+                        }
                     }
                 }
             }
             if(hazardCheck){
                 activeCar = i+1;
-                hazard.setLayoutX(cars.get(i).getLayoutX()+180);
+                hazard.setLayoutY(-10);
+                hazard.setLayoutX(cars.get(i).getLayoutX() + 210);
                 hazardStartTime = System.currentTimeMillis();
                 hazard.setVisible(true);
+                hazardActive = true;
             }
         }
         else {
@@ -121,9 +128,16 @@ public class TestScreenController implements Initializable {
                 else{
                     clickCorrect = false;
                 }
+                for(int i = 0; i < carsMove.size(); i++){
+                    carsMove.set(i, true);
+                }
                 activeCar = 0;
                 hazard.setVisible(false);
+                hazardActive = false;
             }
+        }
+        if(hazardActive){
+            hazard.setLayoutY(hazard.getLayoutY() + 1);
         }
     }
     /**
@@ -166,26 +180,20 @@ public class TestScreenController implements Initializable {
         {
             switch(DriversTestModel.getCarColor()){
                 case "Red": image = new Image("/Car2.png");
-                System.out.println("Is loaded: " + image.isError());
                     break;
                 case "Green": image = new Image(getClass().getResourceAsStream("/Car1.png"));
-                System.out.println("Is loaded: " + image.isError());
                     break;
                 case "Blue": image = new Image(getClass().getResourceAsStream("/Car3.png"));
-                System.out.println("Is loaded: " + image.isError());
                     break;
                 default: image = new Image(getClass().getResourceAsStream("/Car2.png"));
-                System.out.println("Is loaded: " + image.isError());
             }  
             ImageView car = new ImageView(image);
             final int finali = i;
             car.setOnMouseClicked(e -> { 
                carClicked(finali); 
             });
-            car.setX(i * 100);
-            car.setLayoutX(i * 100);
-            car.setY(100);
-            car.setLayoutY(100);
+            car.setLayoutX(i * 150);
+            car.setLayoutY(169);
             car.setVisible(true);
             car.toFront();
             pane.getChildren().add(car);

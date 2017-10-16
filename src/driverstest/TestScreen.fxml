@@ -9,7 +9,7 @@
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driverstest.TestScreenController">
    <children>
       <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="400.0" stroke="BLACK" strokeType="INSIDE" width="900.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434343" height="200.0" layoutX="124.0" layoutY="34.0" scaleY="0.2" stroke="BLACK" strokeType="OUTSIDE" width="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434343" height="200.0" layoutX="1.0" layoutY="85.0" scaleY="0.2" stroke="BLACK" strokeType="OUTSIDE" width="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <ImageView fx:id="hazard" layoutX="438.0" layoutY="119.0">
          <image>
             <Image url="@../Hazard.png" />
