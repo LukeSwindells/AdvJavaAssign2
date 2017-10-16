@@ -21,8 +21,8 @@
       <Label layoutX="59.0" layoutY="122.0" text="Password:" />
       <TextField fx:id="userNameField" layoutX="122.0" layoutY="82.0" onAction="#checkLogin" promptText="Admin" text="admin" />
       <PasswordField fx:id="passwordField" layoutX="122.0" layoutY="118.0" onAction="#checkLogin" promptText="Enter the Password" text="admin" />
-      <ComboBox fx:id="carNumBox" layoutX="349.0" layoutY="82.0" prefWidth="150.0" promptText="Please select the number of cars" />
-      <ComboBox fx:id="carColBox" layoutX="349.0" layoutY="118.0" prefWidth="150.0" promptText="Select the Colour of the car" />
+      <ComboBox fx:id="carNumBox" layoutX="349.0" layoutY="82.0" onAction="#numberSelected" prefHeight="25.0" prefWidth="221.0" promptText="Please select the number of cars" />
+      <ComboBox fx:id="carColBox" layoutX="349.0" layoutY="118.0" onAction="#colorSelected" prefHeight="25.0" prefWidth="221.0" promptText="Select the Colour of the car" />
       <Label fx:id="demoLeftField" layoutX="59.0" layoutY="214.0" text="Number of Demos Left: " />
       <Label layoutX="265.0" layoutY="6.0" text="Traffic Simulator V2.0" />
       <MenuBar layoutY="2.0">
@@ -34,5 +34,6 @@
           </Menu>
         </menus>
       </MenuBar>
+      <ComboBox fx:id="testBox" layoutX="349.0" layoutY="157.0" onAction="#testSelected" prefHeight="25.0" prefWidth="221.0" promptText="Select the Test Scenario" />
    </children>
 </AnchorPane>

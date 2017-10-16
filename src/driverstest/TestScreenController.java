@@ -197,11 +197,15 @@ public class TestScreenController implements Initializable {
      * Runs test for 5 minutes then calls endtest.
      */
     public void runTest()throws Exception{
-        Long end = System.currentTimeMillis() + 300000;
+        Long end = System.currentTimeMillis() + 30000;
         AnimationTimer a = new AnimationTimer(){@Override public void handle(long now){
             moveCars();
-            //createHazard();
-            carSpeeding();
+            if(DriversTestModel.getTestType() == "Hazard"){
+                createHazard();
+            }
+            if(DriversTestModel.getTestType() == "Speeding"){
+                carSpeeding();
+            }
             if(System.currentTimeMillis() > end){
                 try {
                     endTest();

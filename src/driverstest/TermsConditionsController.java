@@ -34,11 +34,13 @@ public class TermsConditionsController implements Initializable {
     @FXML
     private PasswordField passwordField;
     @FXML
-    private ComboBox<?> carNumBox;
+    private ComboBox<String> carNumBox;
     @FXML
-    private ComboBox<?> carColBox;
+    private ComboBox<String> carColBox;
     @FXML
     private Label demoLeftField;
+    @FXML
+    private ComboBox<String> testBox;
     
     /**
      * When Start button is pressed start test. 
@@ -64,6 +66,21 @@ public class TermsConditionsController implements Initializable {
         Scene scene = new Scene(root);
         aStage.setTitle("Change Colour");
         aStage.setScene(scene);
+    }
+    
+    @FXML
+    private void numberSelected(ActionEvent event) {
+        DriversTestModel.setCarNo(Integer.parseInt(carNumBox.getValue()));
+    }
+    
+    @FXML
+    private void colorSelected(ActionEvent event) {
+        DriversTestModel.setCarColor(carColBox.getValue());
+    }
+    
+    @FXML
+    private void testSelected(ActionEvent event) {
+       DriversTestModel.setTestType(testBox.getValue()); 
     }
     
     @FXML
@@ -96,9 +113,11 @@ public class TermsConditionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startButton.setVisible(false);
+        carNumBox.getItems().addAll("1","2","3","4","5");
+        carColBox.getItems().addAll("Red","Blue","Green");
+        testBox.getItems().addAll("Speeding", "Hazard");
         DriversTestModel.createUsers();
     }    
 
-    
-    
+   
 }

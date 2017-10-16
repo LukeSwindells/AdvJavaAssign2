@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,10 +24,13 @@ public class ResultTableController implements Initializable {
     @FXML TableView table;
     @FXML Button printButton;
     private static List<TestResult> testData;
+    @FXML
+    private PieChart pieChart;
 
     /**
      * When Print button is pressed save table to Table.txt. 
      */
+    @FXML
     public void printButtonPressed(ActionEvent event)throws Exception {
         File f = new File("Table.txt");
         if(!f.exists()){
@@ -47,6 +51,9 @@ public class ResultTableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        int noSuccess = 0;
+        int noMisses = 0;
+        int noMisclick = 0;
         table.setEditable(true);
         TableColumn idCol = new TableColumn("ID");
         TableColumn carCol = new TableColumn("Car ID");
@@ -60,7 +67,21 @@ public class ResultTableController implements Initializable {
         testData = DriversTestModel.getTableData();
         for(int i = 0; i < testData.size(); i++){
             table.getItems().add(testData.get(i));
+            switch(testData.get(i).getResult()){
+                case "Success": noSuccess++;
+                                break;
+                case "Miss": noMisses++;
+                                break;   
+                case "Misclick": noMisclick++;
+                                break;
+            }
         }
         table.setEditable(false);
+        PieChart.Data success = new PieChart.Data("Success", noSuccess);
+        PieChart.Data miss = new PieChart.Data("Misses", noMisses);
+        PieChart.Data misclick = new PieChart.Data("Misclicks", noMisclick);
+        pieChart.getData().add(miss);
+        pieChart.getData().add(misclick);
+        pieChart.getData().add(success);
     }    
 }
