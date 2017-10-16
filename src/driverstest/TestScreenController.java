@@ -41,9 +41,12 @@ public class TestScreenController implements Initializable {
     private Boolean clickCorrect = false;
     private Boolean hazardActive = false;
     private Boolean speedingActive = false;
+    private int speedingCar = 0;
     private int resultID = 0;
     private List<ImageView> cars = new ArrayList<ImageView>();
     private List<Boolean> carsMove = new ArrayList<Boolean>();
+    private Image carImage;
+    private Image pinkImage;
     
     
     
@@ -62,7 +65,9 @@ public class TestScreenController implements Initializable {
     public void carClicked(int i){
         if(activeCar == i + 1){
             carsMove.set(i, false);
-            DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
+            if(!clickCorrect){
+                DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
+            }
             clickCorrect = true;
         }
         else{
@@ -88,7 +93,12 @@ public class TestScreenController implements Initializable {
                     }
                 }
             }
-            if(canMove && carsMove.get(i)){toMove.setLayoutX(toMove.getLayoutX()+1);}
+            if(canMove && carsMove.get(i)){
+                if(speedingActive && i == speedingCar){
+                    toMove.setLayoutX(toMove.getLayoutX()+1.25);
+                }
+                else{toMove.setLayoutX(toMove.getLayoutX()+1);}
+            }
             if(toMove.getLayoutX() >= 935){
             toMove.setLayoutX(0);
             }
@@ -102,15 +112,11 @@ public class TestScreenController implements Initializable {
         if(activeCar == 0){
             Random r = new Random();
             int i = r.nextInt(DriversTestModel.getCarNo());
-            for(int j=0; j < cars.size(); j++){
-                if(i != j){
-                    if(!(cars.get(i).getLayoutX()< 920)){
-                        if(!carsMove.get(i)){
-                            hazardCheck = false;
-                        }
+                if(!(cars.get(i).getLayoutX()< 920)){
+                    if(!carsMove.get(i)){
+                        hazardCheck = false;
                     }
                 }
-            }
             if(hazardCheck){
                 activeCar = i+1;
                 hazard.setLayoutY(-10);
@@ -140,6 +146,42 @@ public class TestScreenController implements Initializable {
             hazard.setLayoutY(hazard.getLayoutY() + 1);
         }
     }
+    
+    private void carSpeeding(){
+        Boolean speedingCheck = true;
+        if(activeCar == 0){
+            Random r = new Random();
+            int i = r.nextInt(DriversTestModel.getCarNo());
+                if(!(cars.get(i).getLayoutX()< 920)){
+                    if(!carsMove.get(i)){
+                        speedingCheck = false;
+                    }
+                }
+            if(speedingCheck){
+                hazardStartTime = System.currentTimeMillis();
+                speedingCar = i;
+                activeCar = i+1;
+                cars.get(i).setImage(pinkImage);
+                speedingActive = true;
+            }
+        }
+        else {
+            if(hazardStartTime + 3000 < System.currentTimeMillis()){
+                if(!clickCorrect){
+                    DriversTestModel.addResult(resultID++, activeCar, "Miss", ZonedDateTime.now());
+                }
+                else{
+                    clickCorrect = false;
+                }
+                for(int i = 0; i < carsMove.size(); i++){
+                    carsMove.set(i, true);
+                }
+                activeCar = 0;
+                speedingActive = false;
+                cars.get(speedingCar).setImage(carImage);
+            }
+        }
+    }
     /**
      * Ends test and opens result table.
      */
@@ -158,7 +200,8 @@ public class TestScreenController implements Initializable {
         Long end = System.currentTimeMillis() + 300000;
         AnimationTimer a = new AnimationTimer(){@Override public void handle(long now){
             moveCars();
-            createHazard();
+            //createHazard();
+            carSpeeding();
             if(System.currentTimeMillis() > end){
                 try {
                     endTest();
@@ -175,19 +218,19 @@ public class TestScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image;
+        switch(DriversTestModel.getCarColor()){
+                case "Red": carImage = new Image(getClass().getResourceAsStream("/Car2.png"));
+                    break;
+                case "Green": carImage = new Image(getClass().getResourceAsStream("/Car1.png"));
+                    break;
+                case "Blue": carImage = new Image(getClass().getResourceAsStream("/Car3.png"));
+                    break;
+                default: carImage = new Image(getClass().getResourceAsStream("/Car2.png"));
+            }  
+        pinkImage = new Image(getClass().getResourceAsStream("/CarP.png"));
         for(int i = 0; i < DriversTestModel.getCarNo(); i++)
         {
-            switch(DriversTestModel.getCarColor()){
-                case "Red": image = new Image("/Car2.png");
-                    break;
-                case "Green": image = new Image(getClass().getResourceAsStream("/Car1.png"));
-                    break;
-                case "Blue": image = new Image(getClass().getResourceAsStream("/Car3.png"));
-                    break;
-                default: image = new Image(getClass().getResourceAsStream("/Car2.png"));
-            }  
-            ImageView car = new ImageView(image);
+            ImageView car = new ImageView(carImage);
             final int finali = i;
             car.setOnMouseClicked(e -> { 
                carClicked(finali); 
