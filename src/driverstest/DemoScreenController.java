@@ -62,16 +62,15 @@ public class DemoScreenController implements Initializable {
     /**
      * When car 1 is click check if car is active and adds result to model based on result
      */
-    public void carClicked(int i){
-        if(activeCar == i + 1){
-            carsMove.set(i, false);
-            if(!clickCorrect){
-                DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
+    public void autoClicked(){
+        if(activeCar > 0){
+            if(hazardStartTime + 1000 < System.currentTimeMillis()){
+                carsMove.set(activeCar - 1, false);
+                if(!clickCorrect){
+                    DriversTestModel.addResult(resultID++, activeCar - 1, "Success", ZonedDateTime.now());
+                }
+                clickCorrect = true;
             }
-            clickCorrect = true;
-        }
-        else{
-            DriversTestModel.addResult(resultID++ , i+1, "Misclick", ZonedDateTime.now());
         }
     }
 
@@ -206,6 +205,7 @@ public class DemoScreenController implements Initializable {
             if(DriversTestModel.getTestType() == "Speeding"){
                 carSpeeding();
             }
+            autoClicked();
             if(System.currentTimeMillis() > end){
                 try {
                     endTest();
@@ -235,10 +235,6 @@ public class DemoScreenController implements Initializable {
         for(int i = 0; i < DriversTestModel.getCarNo(); i++)
         {
             ImageView car = new ImageView(carImage);
-            final int finali = i;
-            car.setOnMouseClicked(e -> { 
-               carClicked(finali); 
-            });
             car.setLayoutX(i * 150);
             car.setLayoutY(169);
             car.setVisible(true);

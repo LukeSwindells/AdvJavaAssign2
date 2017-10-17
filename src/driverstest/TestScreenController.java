@@ -24,6 +24,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import java.util.Random;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class for the Test Screen
@@ -38,6 +39,7 @@ public class TestScreenController implements Initializable {
     @FXML private AnchorPane pane;
     private int activeCar = 0;
     private long hazardStartTime;
+    private long lightStartTime;
     private Boolean clickCorrect = false;
     private Boolean hazardActive = false;
     private Boolean speedingActive = false;
@@ -47,6 +49,8 @@ public class TestScreenController implements Initializable {
     private List<Boolean> carsMove = new ArrayList<Boolean>();
     private Image carImage;
     private Image pinkImage;
+    @FXML
+    private Circle greenLight;
     
     
     
@@ -69,6 +73,8 @@ public class TestScreenController implements Initializable {
                 DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
             }
             clickCorrect = true;
+            greenLight.setVisible(true);
+            lightStartTime = System.currentTimeMillis();
         }
         else{
             DriversTestModel.addResult(resultID++ , i+1, "Misclick", ZonedDateTime.now());
@@ -205,6 +211,9 @@ public class TestScreenController implements Initializable {
             }
             if(DriversTestModel.getTestType() == "Speeding"){
                 carSpeeding();
+            }
+            if(lightStartTime + 3000 < System.currentTimeMillis()){
+                greenLight.setVisible(false);
             }
             if(System.currentTimeMillis() > end){
                 try {
