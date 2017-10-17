@@ -19,6 +19,7 @@ public class DriversTest extends Application {
      */
     @Override
     public void start(Stage primaryStage)throws Exception {
+      DriversTestModel.createUsers();
       Stage aStage = new Stage();
       aStage = primaryStage; 
       Parent root = FXMLLoader.load(getClass().getResource("TermsConditions.fxml"));

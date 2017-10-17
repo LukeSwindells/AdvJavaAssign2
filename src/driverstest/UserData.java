@@ -48,5 +48,10 @@ public class UserData {
     {
         demoLeft = i;
     }
+    
+    public void useDemo(){
+        demoLeft--;
+        System.out.println(demoLeft);
+    }
 
 }

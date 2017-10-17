@@ -41,6 +41,8 @@ public class TermsConditionsController implements Initializable {
     private Label demoLeftField;
     @FXML
     private ComboBox<String> testBox;
+    private boolean loggedIn = false;
+    private int userID = 0;
     
     /**
      * When Start button is pressed start test. 
@@ -84,10 +86,24 @@ public class TermsConditionsController implements Initializable {
     }
     
     @FXML
+    private void demoPressed(ActionEvent event) throws Exception {
+        if(loggedIn){
+            if(DriversTestModel.getUserData().get(userID).getDemoLeft()>0){
+                DriversTestModel.getUserData().get(userID).useDemo();
+                Node source = (Node) event.getSource();
+                Stage aStage = (Stage)source.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("DemoScreen.fxml"));
+                Scene scene = new Scene(root);
+                aStage.setTitle("Driver's Test Demo");
+                aStage.setScene(scene);
+            }
+        }
+    }
+    
+    @FXML
     private void checkLogin(ActionEvent event) {
         boolean usernameVaild = false;
         boolean passwordVaild = false;
-        int userID = 0;
         for(int i = 0; i < DriversTestModel.getUserData().size(); i++){
             if (userNameField.getText().equals(DriversTestModel.getUserData().get(i).getUsername())){
                 usernameVaild = true;
@@ -102,9 +118,11 @@ public class TermsConditionsController implements Initializable {
         if(usernameVaild && passwordVaild){
             startButton.setVisible(true);
             demoLeftField.setText("Number of Demos Left: " + DriversTestModel.getUserData().get(userID).getDemoLeft());
+            loggedIn = true;
         }
         else{
             demoLeftField.setText("Invalid Username or Password");
+            loggedIn = true;
         }
     }
     /**
@@ -116,8 +134,9 @@ public class TermsConditionsController implements Initializable {
         carNumBox.getItems().addAll("1","2","3","4","5");
         carColBox.getItems().addAll("Red","Blue","Green");
         testBox.getItems().addAll("Speeding", "Hazard");
-        DriversTestModel.createUsers();
     }    
+
+    
 
    
 }
