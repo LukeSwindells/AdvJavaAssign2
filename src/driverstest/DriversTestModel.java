@@ -20,6 +20,7 @@ public class DriversTestModel {
     private static String carColor = "Green";
     private static List<UserData> users = new ArrayList<UserData>();
     private static String testType = "Speeding";
+    private static int testTime = 30;
     
     /**
      * Sets background colour. 
@@ -67,6 +68,11 @@ public class DriversTestModel {
         testData.add(t);
     }
     
+    public static void addResult(int aId, int aCarNo, String aResult, ZonedDateTime aTime, int aRating) {
+        TestResult t = new TestResult(aId, aCarNo, aResult, aTime, aRating);
+        testData.add(t);
+    }
+    
     public static int getCarNo()
     {
         return carNo;
@@ -97,6 +103,16 @@ public class DriversTestModel {
         testType = s;
     }
     
+    public static int getTestTime()
+    {
+        return testTime;
+    }
+    
+    public static void setTestTime(int i)
+    {
+        testTime = i;
+    }
+    
     /**
      * Get all data from table. 
      */
@@ -106,7 +122,9 @@ public class DriversTestModel {
     
     public static void createUsers(){
         UserData a = new UserData("admin", "admin");
+        UserData b = new UserData("student", "student");
         users.add(a);
+        users.add(b);
     }
     
     public static List<UserData> getUserData(){

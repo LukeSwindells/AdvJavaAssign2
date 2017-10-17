@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 
 /**
  * FXML Controller class for Result Table
@@ -59,11 +60,13 @@ public class ResultTableController implements Initializable {
         TableColumn carCol = new TableColumn("Car ID");
         TableColumn resultCol = new TableColumn("Result");
         TableColumn timeCol = new TableColumn("Time");
+        TableColumn starCol = new TableColumn("Rating");
         idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
         carCol.setCellValueFactory(new PropertyValueFactory<>("CarNo"));
         resultCol.setCellValueFactory(new PropertyValueFactory<>("Result"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("Time"));
-        table.getColumns().addAll(idCol, carCol,resultCol,timeCol);
+        starCol.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        table.getColumns().addAll(idCol, carCol,resultCol,timeCol,starCol);
         testData = DriversTestModel.getTableData();
         for(int i = 0; i < testData.size(); i++){
             table.getItems().add(testData.get(i));

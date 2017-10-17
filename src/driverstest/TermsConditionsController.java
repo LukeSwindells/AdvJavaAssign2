@@ -43,6 +43,8 @@ public class TermsConditionsController implements Initializable {
     private ComboBox<String> testBox;
     private boolean loggedIn = false;
     private int userID = 0;
+    @FXML
+    private TextField testTimeField;
     
     /**
      * When Start button is pressed start test. 
@@ -83,6 +85,11 @@ public class TermsConditionsController implements Initializable {
     @FXML
     private void testSelected(ActionEvent event) {
        DriversTestModel.setTestType(testBox.getValue()); 
+    }
+    
+    @FXML
+    private void changeTime(ActionEvent event) {
+        DriversTestModel.setTestTime(Integer.parseInt(testTimeField.getText()));
     }
     
     @FXML
@@ -135,6 +142,8 @@ public class TermsConditionsController implements Initializable {
         carColBox.getItems().addAll("Red","Blue","Green");
         testBox.getItems().addAll("Speeding", "Hazard");
     }    
+
+    
 
     
 

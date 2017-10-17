@@ -67,10 +67,20 @@ public class TestScreenController implements Initializable {
      * When car 1 is click check if car is active and adds result to model based on result
      */
     public void carClicked(int i){
+        int rating;
         if(activeCar == i + 1){
             carsMove.set(i, false);
             if(!clickCorrect){
-                DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now());
+                if(hazardStartTime + 1000 > System.currentTimeMillis()){
+                    rating = 3;
+                }
+                else if(hazardStartTime + 2000 > System.currentTimeMillis()){
+                    rating = 2;
+                }
+                else{
+                    rating = 1;
+                }
+                DriversTestModel.addResult(resultID++, i+1, "Success", ZonedDateTime.now(), rating);
             }
             clickCorrect = true;
             greenLight.setVisible(true);
@@ -203,7 +213,7 @@ public class TestScreenController implements Initializable {
      * Runs test for 5 minutes then calls endtest.
      */
     public void runTest()throws Exception{
-        Long end = System.currentTimeMillis() + 30000;
+        Long end = System.currentTimeMillis() + (DriversTestModel.getTestTime() *1000);
         AnimationTimer a = new AnimationTimer(){@Override public void handle(long now){
             moveCars();
             if(DriversTestModel.getTestType() == "Hazard"){

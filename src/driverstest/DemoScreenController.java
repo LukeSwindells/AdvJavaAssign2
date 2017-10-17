@@ -196,7 +196,7 @@ public class DemoScreenController implements Initializable {
      * Runs test for 5 minutes then calls endtest.
      */
     public void runTest()throws Exception{
-        Long end = System.currentTimeMillis() + 30000;
+        Long end = System.currentTimeMillis() + DriversTestModel.getTestTime() * 1000;
         AnimationTimer a = new AnimationTimer(){@Override public void handle(long now){
             moveCars();
             if(DriversTestModel.getTestType() == "Hazard"){
