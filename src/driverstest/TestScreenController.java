@@ -29,7 +29,7 @@ import javafx.scene.shape.Circle;
 /**
  * FXML Controller class for the Test Screen
  *
- * @author Luke Swindells
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class TestScreenController implements Initializable {
     
@@ -64,7 +64,7 @@ public class TestScreenController implements Initializable {
     }
     
     /**
-     * When car 1 is click check if car is active and adds result to model based on result
+     * When a car is clicked check if car is active and adds result to model based on result
      */
     public void carClicked(int i){
         int rating;
@@ -92,7 +92,7 @@ public class TestScreenController implements Initializable {
     }
 
     /**
-     * Checks if car number i can move and if so moves it.
+     * Checks if each car can move and if so moves it.
      */
     private void moveCars()
     {
@@ -163,6 +163,9 @@ public class TestScreenController implements Initializable {
         }
     }
     
+    /**
+     * Causes a car to start speeding and changes its colour to pink if able.
+     */
     private void carSpeeding(){
         Boolean speedingCheck = true;
         if(activeCar == 0){
@@ -210,7 +213,7 @@ public class TestScreenController implements Initializable {
         aStage.setScene(scene);
     }
     /**
-     * Runs test for 5 minutes then calls endtest.
+     * Runs test for set amount of time then calls endtest.
      */
     public void runTest()throws Exception{
         Long end = System.currentTimeMillis() + (DriversTestModel.getTestTime() *1000);
@@ -237,7 +240,7 @@ public class TestScreenController implements Initializable {
     }
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class and generates the cars.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -14,12 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 
 /**
  * FXML Controller class for Result Table
  *
- * @author Luke Swindells
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class ResultTableController implements Initializable {
     @FXML TableView table;
@@ -48,7 +47,7 @@ public class ResultTableController implements Initializable {
     }
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class fills table and graph.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

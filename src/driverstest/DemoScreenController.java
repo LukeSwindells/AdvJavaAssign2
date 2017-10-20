@@ -26,9 +26,9 @@ import java.util.Random;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * FXML Controller class for the Test Screen
+ * FXML Controller class for the Demo Screen
  *
- * @author Luke Swindells
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class DemoScreenController implements Initializable {
     
@@ -60,7 +60,7 @@ public class DemoScreenController implements Initializable {
     }
     
     /**
-     * When car 1 is click check if car is active and adds result to model based on result
+     * When a car is active stop the car after one second.
      */
     public void autoClicked(){
         if(activeCar > 0){
@@ -75,7 +75,7 @@ public class DemoScreenController implements Initializable {
     }
 
     /**
-     * Checks if car number i can move and if so moves it.
+     * Checks if each car can move and if so moves it.
      */
     private void moveCars()
     {
@@ -146,6 +146,9 @@ public class DemoScreenController implements Initializable {
         }
     }
     
+    /**
+     * Causes a car to start speeding and changes its colour to pink if able.
+     */
     private void carSpeeding(){
         Boolean speedingCheck = true;
         if(activeCar == 0){
@@ -193,7 +196,7 @@ public class DemoScreenController implements Initializable {
         aStage.setScene(scene);
     }
     /**
-     * Runs test for 5 minutes then calls endtest.
+     * Runs test for the set time then calls endtest.
      */
     public void runTest()throws Exception{
         Long end = System.currentTimeMillis() + DriversTestModel.getTestTime() * 1000;
@@ -218,7 +221,7 @@ public class DemoScreenController implements Initializable {
     }
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class and generates the cars.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

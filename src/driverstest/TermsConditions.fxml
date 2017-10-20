@@ -15,7 +15,7 @@
    <children>
       <Button fx:id="startButton" layoutX="456.0" layoutY="244.0" mnemonicParsing="false" onAction="#startButtonPressed" prefHeight="53.0" prefWidth="138.0" style="-fx-background-color: green;" text="Start" />
       <Button fx:id="bgButton" layoutX="15.0" layoutY="330.0" mnemonicParsing="false" onAction="#bgButtonPressed" prefHeight="25.0" prefWidth="573.0" text="Change Background Colour" />
-      <Text layoutX="22.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When the test starts you have 300 seconds. There are three cars, when a hazard appears click the car that needs to stop in 3 seconds. After the test you will get your results. Click Select Background Colour to change background colour. Click Start to Start the Test." textAlignment="JUSTIFY" wrappingWidth="421.13671875" />
+      <Text layoutX="22.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your username or password. Change the options on the right. Press Start Demo to play a demo, you can do this 3 times. During the test click the car that needs to brake due to either speeding (shown by the car turning pink) or if it will hit a hazard.  After the test you will get your results. Click Select Background Colour to change background colour. Click Start to Start the Test." textAlignment="JUSTIFY" wrappingWidth="421.13671875" />
       <Button fx:id="startDemoButton" defaultButton="true" layoutX="59.0" layoutY="169.0" mnemonicParsing="false" onAction="#demoPressed" text="StartDemo" />
       <Label layoutX="57.0" layoutY="86.0" text="UserName: " />
       <Label layoutX="59.0" layoutY="122.0" text="Password:" />

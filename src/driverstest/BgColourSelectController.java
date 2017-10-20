@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class for colour selector
  *
- * @author gamer
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class BgColourSelectController implements Initializable {
     private int r = 255;

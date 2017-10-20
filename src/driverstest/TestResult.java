@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * Stores the data for a single click during the test
- * @author Luke Swindells
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class TestResult {
     private final int id;
@@ -15,6 +15,13 @@ public class TestResult {
     private final ZonedDateTime time;
     private final ImageView rating;
     
+    /**
+     * Creates new result with no rating. 
+     * @param aId Result ID
+     * @param aCarNo Car Clicked
+     * @param aResult String for Result "Success" "Misclick" or "Miss"
+     * @param aTime Time Car Was Clicked
+     */
     public TestResult(int aId, int aCarNo, String aResult, ZonedDateTime aTime){
         Image zeroStar = new Image("/0star.png");
         id = aId;
@@ -24,6 +31,14 @@ public class TestResult {
         rating = new ImageView(zeroStar);
     }
     
+    /**
+     * Creates new result.
+     * @param aId Result ID
+     * @param aCarNo Car Clicked
+     * @param aResult String for Result "Success" "Misclick" or "Miss"
+     * @param aTime Time Car Was Clicked
+     * @param aRating Integer between 0 and 3
+     */
     public TestResult(int aId, int aCarNo, String aResult, ZonedDateTime aTime, int aRating){
         Image zeroStar = new Image("/0star.png");
         Image oneStar = new Image("/1star.png");
@@ -45,30 +60,32 @@ public class TestResult {
     }
     
     /**
-     * Return Result ID. 
+     * @return Result ID. 
      */
     public int getID(){
         return id; 
     }
     /**
-     * Return car ID. 
+     * @return car ID. 
      */
     public int getCarNo(){
         return carNo; 
     }
     /**
-     * Return Result String. 
+     * @return Result String. 
      */
     public String getResult(){
         return result; 
     }
     /**
-     * Return Result Time. 
+     * @return Result Time. 
      */
     public ZonedDateTime getTime(){
         return time; 
     }
-    
+    /**
+     * @return Rating Image. 
+     */
     public ImageView getRating(){
         return rating; 
     }

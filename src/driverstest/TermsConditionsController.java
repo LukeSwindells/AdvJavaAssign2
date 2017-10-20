@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class for terms and conditions
  *
- * @author Luke Swindells
+ * @author Luke Swindells and Ravinder Kumar Sharma
  */
 public class TermsConditionsController implements Initializable {
 
@@ -72,26 +72,45 @@ public class TermsConditionsController implements Initializable {
         aStage.setScene(scene);
     }
     
+    /**
+     * When amount of cars is changed update value.
+     * @param event 
+     */
     @FXML
     private void numberSelected(ActionEvent event) {
         DriversTestModel.setCarNo(Integer.parseInt(carNumBox.getValue()));
     }
-    
+    /**
+     * When car colour is changed update value.
+     * @param event 
+     */
     @FXML
     private void colorSelected(ActionEvent event) {
         DriversTestModel.setCarColor(carColBox.getValue());
     }
     
+    /**
+     * When test type is changed update value.
+     * @param event 
+     */
     @FXML
     private void testSelected(ActionEvent event) {
        DriversTestModel.setTestType(testBox.getValue()); 
     }
     
+    /**
+     * When test time is changed update value.
+     * @param event 
+     */
     @FXML
     private void changeTime(ActionEvent event) {
         DriversTestModel.setTestTime(Integer.parseInt(testTimeField.getText()));
     }
     
+    /**
+     * When the demo button is pressed start demo is user is logged in and has demos remaining.
+     * @param event 
+     */
     @FXML
     private void demoPressed(ActionEvent event) throws Exception {
         if(loggedIn){
@@ -107,6 +126,10 @@ public class TermsConditionsController implements Initializable {
         }
     }
     
+    /**
+     * When username or password are changed check if valid and display demos left.
+     * @param event 
+     */
     @FXML
     private void checkLogin(ActionEvent event) {
         boolean usernameVaild = false;
@@ -141,11 +164,5 @@ public class TermsConditionsController implements Initializable {
         carNumBox.getItems().addAll("1","2","3","4","5");
         carColBox.getItems().addAll("Red","Blue","Green");
         testBox.getItems().addAll("Speeding", "Hazard");
-    }    
-
-    
-
-    
-
-   
+    }       
 }
